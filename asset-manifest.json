@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/rq-spbstu/static/css/main.d221dc40.css",
+    "main.js": "/rq-spbstu/static/js/main.745f0da3.js",
+    "index.html": "/rq-spbstu/index.html",
+    "main.d221dc40.css.map": "/rq-spbstu/static/css/main.d221dc40.css.map",
+    "main.745f0da3.js.map": "/rq-spbstu/static/js/main.745f0da3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d221dc40.css",
+    "static/js/main.745f0da3.js"
+  ]
+}
