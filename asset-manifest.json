@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/rq-spbstu/static/css/main.d221dc40.css",
-    "main.js": "/rq-spbstu/static/js/main.e0a802fc.js",
+    "main.js": "/rq-spbstu/static/js/main.89ce4aab.js",
     "index.html": "/rq-spbstu/index.html",
     "main.d221dc40.css.map": "/rq-spbstu/static/css/main.d221dc40.css.map",
-    "main.e0a802fc.js.map": "/rq-spbstu/static/js/main.e0a802fc.js.map"
+    "main.89ce4aab.js.map": "/rq-spbstu/static/js/main.89ce4aab.js.map"
   },
   "entrypoints": [
     "static/css/main.d221dc40.css",
-    "static/js/main.e0a802fc.js"
+    "static/js/main.89ce4aab.js"
   ]
 }
