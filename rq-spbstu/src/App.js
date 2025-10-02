@@ -4,28 +4,52 @@ import { Button, Form, Container, Row, Col, ListGroup } from 'react-bootstrap';
 import seedrandom from 'seedrandom';
 
 const students = [
-  "Архипов Михаил Игоревич",
-  "Бабинов Александр Константинович",
-  "Бартлетт Майлз Патрик Нии Лантей",
-  "Биглер Павел Павлович",
-  "Бобин Кирилл Александрович",
-  "Брезгина Ольга Романовна",
-  "Дастанбу Матин",
-  "Емельянов Александр Андреевич",
-  "Жилкина Лада Михайловна",
-  "Климашова Юлия Сергеевна",
-  "Копац Алексей Дмитриевич",
-  "Макарова Полина Владиславовна",
-  "Перекрестов Глеб Владимирович",
-  "Приезжев Андрей Алексеевич",
-  "Рудько Михаил Андреевич",
-  "Савенко Маргарита Вадимовна",
-  "Сергиенко Кирилл Александрович",
-  "Тимофеев Александр Сергеевич",
-  "Черепанов Никита Иванович",
-  "Кондраев Дмитрий Евгеньевич",
-  "Заркали Рашид"
-].sort();
+  // группа 1
+  { name: "Архипов Михаил Игоревич", groupNumber: 1 },
+  { name: "Бабинов Александр Константинович", groupNumber: 1 },
+  { name: "Бартлетт Майлз Патрик Нии Лантей", groupNumber: 1 },
+  { name: "Биглер Павел Павлович", groupNumber: 1 },
+  { name: "Бобин Кирилл Александрович", groupNumber: 1 },
+  { name: "Брезгина Ольга Романовна", groupNumber: 1 },
+  { name: "Дастанбу Матин", groupNumber: 1 },
+  { name: "Емельянов Александр Андреевич", groupNumber: 1 },
+  { name: "Жилкина Лада Михайловна", groupNumber: 1 },
+  { name: "Климашова Юлия Сергеевна", groupNumber: 1 },
+  { name: "Копац Алексей Дмитриевич", groupNumber: 1 },
+  { name: "Макарова Полина Владиславовна", groupNumber: 1 },
+  { name: "Перекрестов Глеб Владимирович", groupNumber: 1 },
+  { name: "Приезжев Андрей Алексеевич", groupNumber: 1 },
+  { name: "Рудько Михаил Андреевич", groupNumber: 1 },
+  { name: "Савенко Маргарита Вадимовна", groupNumber: 1 },
+  { name: "Сергиенко Кирилл Александрович", groupNumber: 1 },
+  { name: "Тимофеев Александр Сергеевич", groupNumber: 1 },
+  { name: "Черепанов Никита Иванович", groupNumber: 1 },
+  { name: "Кондраев Дмитрий Евгеньевич", groupNumber: 1 },
+  { name: "Заркали Рашид", groupNumber: 1 },
+
+  // группа 2
+  { name: "Аббаси Дорса", groupNumber: 2 },
+  { name: "Афанасьев Борис", groupNumber: 2 },
+  { name: "Афанасьева Алина", groupNumber: 2 },
+  { name: "Бадашкеев Андрей", groupNumber: 2 },
+  { name: "Балакирева Дарья", groupNumber: 2 },
+  { name: "Волгузов Артем", groupNumber: 2 },
+  { name: "Горюнов Максим", groupNumber: 2 },
+  { name: "Елунина Александра", groupNumber: 2 },
+  { name: "Карпович Лидия", groupNumber: 2 },
+  { name: "Качур Антон", groupNumber: 2 },
+  { name: "Коток Владислав", groupNumber: 2 },
+  { name: "Марков Михаил", groupNumber: 2 },
+  { name: "Ньянгва Джубиле", groupNumber: 2 },
+  { name: "Мельников Николай", groupNumber: 2 },
+  { name: "Попова Рината", groupNumber: 2 },
+  { name: "Романчук Евгений", groupNumber: 2 },
+  { name: "Садовников Дмитрий", groupNumber: 2 },
+  { name: "Свиридов Артем", groupNumber: 2 },
+  { name: "Сун Цзюньси", groupNumber: 2 },
+  { name: "Гельфанд Анна", groupNumber: 2 }
+];
+
 
 function shuffleArray(array, rng) {
   /*
@@ -74,11 +98,19 @@ function App() {
 
   const generateQueue = () => {
     const rng = seedrandom(seed);
-    const selectedStudents = students.filter(
-      (_, index) => checkedStudents[index]
+  
+    // shuffle all students to save order.
+    const allShuffled = shuffleArray(
+      students.map((student, index) => ({ student, index })),
+      rng
     );
-    const shuffled = shuffleArray(selectedStudents, rng);
-    setRandomQueue(shuffled);
+  
+    // Exclude unselected students.
+    const selected = allShuffled
+      .filter(({ index }) => checkedStudents[index])
+      .map(({ student }) => student);
+  
+    setRandomQueue(selected);
   };
 
   return (
@@ -103,10 +135,13 @@ function App() {
               <ListGroup.Item key={index}>
                 <Form.Check
                   type="checkbox"
-                  label={student}
+                  label={`${student.name}    (group: ${student.groupNumber})`}
                   checked={checkedStudents[index]}
                   onChange={() => handleCheckboxChange(index)}
                   className="me-2"
+                  style={{
+                    backgroundColor: student.groupNumber === 2 ? "#ffc7f2" : "#c7ffd4"
+                  }}
                 />
               </ListGroup.Item>
             ))}
@@ -119,7 +154,7 @@ function App() {
             <ListGroup>
               {randomQueue.map((student, index) => (
                 <ListGroup.Item key={index}>
-                  {index + 1}. {student}
+                  {index + 1}. {student.name}
                 </ListGroup.Item>
               ))}
             </ListGroup>
